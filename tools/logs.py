@@ -1,5 +1,18 @@
-from utils.kubectl import run_kubectl
+class LogsTool(KubernetesTool):
 
+    name = "logs"
 
-def get_logs(pod_name, namespace="default"):
-    return run_kubectl(f"logs -n {namespace} {pod_name}")
+    description = "Get pod logs"
+
+    def run(self, **kwargs):
+
+        pod = kwargs["pod"]
+
+        namespace = kwargs.get(
+            "namespace",
+            "default"
+        )
+
+        return run_kubectl(
+            f"logs {pod} -n {namespace}"
+        )

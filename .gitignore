@@ -1,19 +1,18 @@
-# Virtual environment
-.venv/
-
-# Python cache
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Virtual Environment
+.venv/
 
 # Environment variables
 .env
 
-# IDE
+# VS Code
 .vscode/
+
+# JetBrains
 .idea/
 
-# OS files
+# macOS
 .DS_Store
-
-# Logs
-*.log

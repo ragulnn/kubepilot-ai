@@ -4,10 +4,11 @@ from utils.kubectl import run_kubectl
 
 
 @register_tool
-class PodsTool(KubernetesTool):
+class NamespacesTool(KubernetesTool):
 
-    name = "pods"
-    description = "List Kubernetes Pods"
+    name = "namespaces"
+
+    description = "List Kubernetes namespaces"
 
     def run(self, **kwargs):
-        return run_kubectl("get pods -A")
+        return run_kubectl("get namespaces")
