@@ -1,3 +1,6 @@
+from agent.router import Router
+from agent.graph import graph
+from agent.executor import Executor
 from tools.pods import get_pods
 from tools.logs import get_logs
 from tools.describe import describe_pod
@@ -16,6 +19,8 @@ from tools.pv import get_pv
 
 from agent.ai import analyze_cluster
 
+    router = Router() 
+    executor = Executor()
 
 def print_menu():
     print("\n" + "=" * 60)
@@ -41,79 +46,49 @@ def print_menu():
 
 def main():
 
-    while True:
+      while True:
 
-        print_menu()
+    print("\n==============================")
+    print("🤖 KubePilot AI")
+    print("==============================")
 
-        choice = input("\nChoose an option: ")
+    question = input("\nAsk a Kubernetes question: ")
 
-        if choice == "1":
-            print(get_pods())
+    if question.lower() == "exit":
+        break
 
-        elif choice == "2":
-            namespace = input("Namespace: ")
-            pod = input("Pod Name: ")
-            print(get_logs(pod, namespace))
+    intent = router.route(question)
 
-        elif choice == "3":
-            namespace = input("Namespace: ")
-            pod = input("Pod Name: ")
-            print(describe_pod(pod, namespace))
+    print(f"\nDetected Intent: {intent}")
 
-        elif choice == "4":
-            print(get_events())
+    if intent == "information":
 
-        elif choice == "5":
-            print(get_nodes())
+        tool = question.split()[-1]
 
-        elif choice == "6":
-            print(get_services())
+        print("\nRunning Tool...\n")
 
-        elif choice == "7":
-            print(get_deployments())
+        try:
+            print(executor.execute({"tool": tool}))
+        except Exception:
+            print("Unknown tool.")
 
-        elif choice == "8":
-            print(get_ingress())
+    elif intent == "investigation":
 
-        elif choice == "9":
-            print(get_configmaps())
+        result = graph.invoke(
+            {
+                "question": question,
+                "actions": [],
+                "observations": [],
+                "current_action": None,
+                "answer": "",
+                "finished": False,
+            }
+        )
 
-        elif choice == "10":
-            print(get_secrets())
+        print("\nAI Diagnosis\n")
+        print(result["answer"])
 
-        elif choice == "11":
-            print(get_pvc())
+    elif intent == "action":
 
-        elif choice == "12":
-            print(get_pv())
-
-        elif choice == "13":
-            print(get_namespaces())
-
-        elif choice == "14":
-
-            namespace = input("Namespace: ")
-            pod = input("Pod Name: ")
-
-            print("\nCollecting Kubernetes information...\n")
-
-            report = troubleshoot_pod(pod, namespace)
-
-            print("Analyzing with AI...\n")
-
-            result = analyze_cluster(report)
-
-            print(result)
-
-        elif choice == "15":
-
-            print("\nGoodbye 👋")
-
-            break
-
-        else:
-            print("\nInvalid option.")
-
-
-if __name__ == "__main__":
-    main()
+        print("\n⚠️ Destructive operations are not enabled yet.")
+        print("Approval workflow will be added in Phase 8.")

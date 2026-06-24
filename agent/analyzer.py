@@ -1,3 +1,4 @@
+from utils.config import ANALYZER_MODEL
 from ollama import chat
 
 
@@ -24,7 +25,7 @@ Explain:
 """
 
         response = chat(
-            model="qwen2.5:3b",
+           model=ANALYZER_MODEL,
             messages=[
                 {
                     "role": "user",

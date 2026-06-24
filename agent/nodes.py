@@ -10,32 +10,38 @@ analyzer = Analyzer()
 def planner_node(state):
     print("\n📋 Planner Node")
 
-    plan = planner.plan(state["question"])
+    action = planner.next_action(
+        state["question"],
+        state["observations"]
+    )
 
-    print(plan)
+    print(action)
 
     return {
-        "actions": plan["actions"]
+        "current_action": action
     }
+
 
 def executor_node(state):
     print("\n⚙️ Executor Node")
 
-    observations = []
+    action = state["current_action"]
 
-    for action in state["actions"]:
-        print(f"Running: {action}")
+    print(f"Running: {action}")
 
-        result = executor.execute(action)
+    result = executor.execute(action)
 
-        observations.append({
-            "action": action,
+    observations = state["observations"] + [
+        {
+            "tool": action["tool"],
             "result": result
-        })
+        }
+    ]
 
     return {
         "observations": observations
     }
+
 
 def analyzer_node(state):
     print("\n🧠 Analyzer Node")

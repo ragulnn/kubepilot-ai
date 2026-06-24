@@ -3,8 +3,7 @@ from typing import TypedDict
 
 class AgentState(TypedDict):
     question: str
-    actions: list
-    observations: list
     current_action: dict | None
+    observations: list
     answer: str
     finished: bool
