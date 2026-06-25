@@ -1,6 +1,10 @@
+import time
+
+from agent.context import ClusterContext
 from agent.planner import Planner
 from agent.executor import Executor
 from agent.analyzer import Analyzer
+from utils.logger import Timer
 
 planner = Planner()
 executor = Executor()
@@ -8,49 +12,70 @@ analyzer = Analyzer()
 
 
 def planner_node(state):
-    print("\n📋 Planner Node")
 
-    action = planner.next_action(
-        state["question"],
-        state["observations"]
-    )
+    with Timer("Planner Node"):
 
-    print(action)
+        print(f"Question : {state['question']}")
 
-    return {
-        "current_action": action
-    }
+        print("\nLoading cluster context...")
+
+        context = ClusterContext().load()
+
+        print("✅ Context Loaded")
+
+        action = planner.next_action(
+            state["question"],
+            state["observations"],
+            context
+        )
+
+        print("\nPlanner Decision")
+
+        print(action)
+
+        return {
+            "current_action": action
+        }
 
 
 def executor_node(state):
-    print("\n⚙️ Executor Node")
 
-    action = state["current_action"]
+    with Timer("Executor Node"):
 
-    print(f"Running: {action}")
+        action = state["current_action"]
 
-    result = executor.execute(action)
+        print(f"Executing : {action}")
 
-    observations = state["observations"] + [
-        {
+        result = executor.execute(action)
+
+        observation = {
+            "step": len(state["observations"]) + 1,
             "tool": action["tool"],
             "result": result
         }
-    ]
 
-    return {
-        "observations": observations
-    }
+        observations = state["observations"] + [observation]
+
+        print("✅ Tool Executed")
+
+        return {
+            "observations": observations
+        }
 
 
 def analyzer_node(state):
-    print("\n🧠 Analyzer Node")
 
-    answer = analyzer.analyze(
-        state["question"],
-        state["observations"]
-    )
+    with Timer("Analyzer Node"):
 
-    return {
-        "answer": answer
-    }
+        print("Analyzing observations...")
+
+        answer = analyzer.analyze(
+            state["question"],
+            state["observations"]
+        )
+
+        print("✅ Investigation Completed")
+
+        return {
+            "answer": answer
+        }

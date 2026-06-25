@@ -29,35 +29,68 @@ class Planner:
         text = text.replace("```", "")
         text = text.strip()
 
-        return json.loads(text)
+        try:
+            return json.loads(text)
 
-    def plan(self, question):
-        return self._call_llm(question)
+        except Exception:
 
-    def next_action(self, question, observations):
+            print("\nInvalid JSON returned by planner:\n")
+            print(text)
+
+            return {
+                "tool": "finish"
+            }
+
+    def next_action(self, question, observations, context):
+        executed_tools = []
+
+        for obs in observations:
+            executed_tools.append(obs["tool"])
+
 
         prompt = f"""
 Question:
 {question}
 
+Cluster Context:
+
+{json.dumps(context, indent=2)}
+
+Already executed tools:
+
+{executed_tools}
+
 Previous observations:
-{observations}
 
-You are investigating a Kubernetes cluster.
+{json.dumps(observations, indent=2)}
+"""
+        action = self._call_llm(prompt)
 
-Choose ONLY ONE next Kubernetes tool.
+        if (
+            action["tool"] in executed_tools
+            and action["tool"] != "finish"
+        ):
+            return {
+                "tool": "finish"
+            }
 
-If more investigation is required return:
 
-{{
-    "tool": "pods"
-}}
+        return action
 
-If enough information has been collected return:
+    def fix_action(self, action, error):
 
-{{
-    "tool": "finish"
-}}
+        prompt = f"""
+The following Kubernetes action is invalid.
+
+Action:
+
+{json.dumps(action, indent=2)}
+
+Validation error:
+
+{error}
+
+Return a corrected Kubernetes action.
 
 Return ONLY valid JSON.
 """

@@ -1,22 +1,24 @@
-SAFE_COMMANDS = {
-    "get",
-    "describe",
-    "logs",
-    "top"
-}
+from agent.tool_schema import TOOL_SCHEMAS
 
 
-def validate(command: str):
-    command = command.strip()
+class Validator:
 
-    if not command.startswith("kubectl"):
-        return False
+    def validate(self, action):
 
-    parts = command.split()
+        tool = action.get("tool")
 
-    if len(parts) < 2:
-        return False
+        if tool not in TOOL_SCHEMAS:
+            return False, f"Unknown tool: {tool}"
 
-    verb = parts[1]
+        required_fields = TOOL_SCHEMAS[tool]
 
-    return verb in SAFE_COMMANDS
+        missing = []
+
+        for field in required_fields:
+            if field not in action:
+                missing.append(field)
+
+        if missing:
+            return False, f"Missing fields: {', '.join(missing)}"
+
+        return True, None
