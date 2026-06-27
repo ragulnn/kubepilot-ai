@@ -2,16 +2,18 @@ from agent.planner import Planner
 
 planner = Planner()
 
-question = "Show all pods"
-
-observations = []
-
 result = planner.next_action(
-    question,
-    observations
+    question="Show all pods",
+    observations=[],
+    history="",
+    resources={
+        "pods": [],
+        "deployments": [],
+        "nodes": [],
+        "services": [],
+    },
+    context={},
+    investigation=None,
 )
 
-print("=" * 50)
-print("Planner Output")
-print("=" * 50)
 print(result)

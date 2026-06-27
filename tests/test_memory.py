@@ -1,0 +1,28 @@
+from agent.memory import Memory
+
+memory = Memory()
+
+filepath = memory.save_incident(
+
+    question="Why is nginx crashing?",
+
+    fingerprint={
+        "root_cause": "OOMKilled"
+    },
+
+    report={
+        "confidence": 0.95
+    },
+
+    observations=[
+        {
+            "tool": "pods"
+        },
+        {
+            "tool": "logs"
+        }
+    ]
+
+)
+
+print("Saved to:", filepath)

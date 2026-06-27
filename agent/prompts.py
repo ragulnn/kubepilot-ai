@@ -23,6 +23,7 @@ nodes
 deployments
 ingress
 namespaces
+kubectl
 pv
 pvc
 configmap
@@ -50,6 +51,33 @@ Examples:
 {
     "tool": "finish"
 }
+Kubectl Get
 
+{{
+    "tool":"kubectl",
+    "command":"get",
+    "resource":"daemonsets",
+    "namespace":"default"
+}}
+
+Kubectl Describe
+
+{{
+    "tool":"kubectl",
+    "command":"describe",
+    "resource":"pod",
+    "name":"nginx-123",
+    "namespace":"default"
+}}
+
+Kubectl Logs
+
+{{
+    "tool":"kubectl",
+    "command":"logs",
+    "resource":"pod",
+    "name":"nginx-123",
+    "namespace":"default"
+}}
 Return ONLY valid JSON.
 """
