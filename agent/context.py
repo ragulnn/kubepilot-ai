@@ -1,26 +1,35 @@
-from tools.pods import PodsTool
-from tools.namespaces import NamespacesTool
-from tools.services import ServicesTool
+from connectors.default_registry import registry
+from connectors.request import EvidenceRequest
 
 
 class ClusterContext:
 
-    def __init__(self):
-
-        self.pods = []
-        self.namespaces = []
-        self.services = []
-
     def load(self):
 
-        self.namespaces = NamespacesTool().run()
+        namespaces = registry.collect(
+            EvidenceRequest(type="namespaces")
+        )
 
-        self.pods = PodsTool().run()
+        pods = registry.collect(
+            EvidenceRequest(type="pods")
+        )
 
-        self.services = ServicesTool().run()
+        services = registry.collect(
+            EvidenceRequest(type="services")
+        )
 
         return {
-            "namespaces": self.namespaces,
-            "pods": self.pods,
-            "services": self.services,
+
+            "namespaces": namespaces.evidence[0]
+            if namespaces.success and namespaces.evidence
+            else "",
+
+            "pods": pods.evidence[0]
+            if pods.success and pods.evidence
+            else "",
+
+            "services": services.evidence[0]
+            if services.success and services.evidence
+            else "",
+
         }

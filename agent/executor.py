@@ -1,5 +1,5 @@
-import tools
-from tools.registry import TOOLS
+from connectors.request import EvidenceRequest
+from connectors.default_registry import registry
 
 
 class Executor:
@@ -9,36 +9,56 @@ class Executor:
         if not isinstance(action, dict):
             raise Exception("Action must be a dictionary.")
 
-        tool_name = action.get("tool")
+        tool = action.get("tool")
 
-        if tool_name == "finish":
+        if tool == "finish":
             return "Investigation completed."
 
-        if tool_name is None:
+        if tool is None:
             raise Exception("Planner did not return a tool.")
 
-        tool = TOOLS.get(tool_name)
+        print(f"Running Tool : {tool}")
 
-        if tool is None:
+        request = EvidenceRequest(
+
+            type=tool,
+
+            namespace=action.get(
+                "namespace"
+            ),
+
+            resource=action.get(
+                "resource"
+            ),
+
+            keyword=action.get(
+                "keyword"
+            ),
+
+            labels=action.get(
+                "labels",
+                {},
+            ),
+
+            filters=action.get(
+                "filters",
+                {},
+            ),
+
+        )
+
+        response = registry.collect(
+            request
+        )
+
+        if not response.success:
 
             raise Exception(
-                f"Tool '{tool_name}' not found.\n"
-                f"Planner returned: {action}"
+                response.message
             )
 
-        kwargs = action.copy()
+        if response.evidence:
 
-        kwargs.pop("tool", None)
+            return response.evidence[0]
 
-        kwargs = {
-            k: v
-            for k, v in kwargs.items()
-            if v not in ("", None)
-        }
-
-        print(f"Running Tool : {tool_name}")
-
-        if kwargs:
-            print(f"Arguments    : {kwargs}")
-
-        return tool.run(**kwargs)
+        return ""

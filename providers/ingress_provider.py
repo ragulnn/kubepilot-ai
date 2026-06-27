@@ -1,5 +1,5 @@
-from tools.base import KubernetesTool
-from tools.registry import register_tool
+from providers.base import KubernetesTool
+from providers.registry import register_tool
 from utils.kubectl import run_kubectl
 
 

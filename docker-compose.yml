@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+
+  kubepilot-agent:
+
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+
+    container_name: kubepilot-agent
+
+    ports:
+      - "8000:8000"
+
+    restart: unless-stopped
+
+  kubepilot-server:
+
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+
+    container_name: kubepilot-server
+
+    ports:
+      - "8080:8080"
+
+    restart: unless-stopped
+
+    depends_on:
+      - kubepilot-agent
