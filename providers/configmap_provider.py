@@ -10,9 +10,13 @@ class ConfigMapTool(KubernetesTool):
 
     description = "List ConfigMaps"
 
-    def run(self, **kwargs):
-
-        namespace = kwargs.get("namespace")
+    def run(
+        self,
+        resource="",
+        name="",
+        namespace="default",
+        **kwargs,
+    ):
 
         if namespace:
 

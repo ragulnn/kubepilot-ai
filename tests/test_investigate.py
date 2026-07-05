@@ -1,16 +1,14 @@
 import requests
 
-payload = {
-
-    "question": "Show all nginx pods"
-
-}
-
 response = requests.post(
 
     "http://localhost:8000/investigate",
 
-    json=payload,
+    json={
+
+        "question": "Show all nginx pods"
+
+    },
 
 )
 

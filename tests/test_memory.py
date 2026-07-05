@@ -1,28 +1,52 @@
-from agent.memory import Memory
+from datetime import datetime
 
-memory = Memory()
+from memory.incident import Incident
+from memory.repository import IncidentRepository
 
-filepath = memory.save_incident(
+repo = IncidentRepository()
 
-    question="Why is nginx crashing?",
+incident = Incident(
 
-    fingerprint={
-        "root_cause": "OOMKilled"
-    },
+    question="Why is nginx restarting?",
 
-    report={
-        "confidence": 0.95
-    },
+    resource_name="nginx",
 
-    observations=[
-        {
-            "tool": "pods"
-        },
-        {
-            "tool": "logs"
-        }
-    ]
+    namespace="default",
+
+    root_cause="Memory Exhaustion",
+
+    confidence=0.95,
+
+    findings=[
+
+        "OOMKilled",
+
+        "Restart Count 8",
+
+    ],
+
+    recommendations=[
+
+        "Increase memory",
+
+    ],
+
+    timestamp=str(
+
+        datetime.now()
+
+    ),
 
 )
 
-print("Saved to:", filepath)
+repo.save(
+
+    incident
+
+)
+
+print(
+
+    repo.load()
+
+)

@@ -1,25 +1,27 @@
 from providers.base import KubernetesTool
 from providers.registry import register_tool
+
 from utils.kubectl import run_kubectl
+from parsers.kubernetes.deployments import DeploymentsParser
 
 
 @register_tool
-class DeploymentsTool(KubernetesTool):
+class DeploymentTool(KubernetesTool):
 
     name = "deployments"
 
-    description = "List Kubernetes deployments"
+    description = "List Kubernetes Deployments"
 
-    def run(self, **kwargs):
+    def run(
+        self,
+        resource="",
+        name="",
+        namespace="default",
+        **kwargs,
+    ):
 
-        namespace = kwargs.get("namespace")
-
-        if namespace:
-
-            return run_kubectl(
-                f"get deployments -n {namespace}"
-            )
-
-        return run_kubectl(
+        output = run_kubectl(
             "get deployments -A"
         )
+
+        return DeploymentsParser().parse(output)

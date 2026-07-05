@@ -1,0 +1,89 @@
+[
+    {
+        "name": "Memory Exhaustion",
+
+        "conditions": {
+
+            "logs": "OOMKilled",
+
+            "memory": 0.95,
+
+            "restarts": 5
+
+        },
+
+        "recommended_fix": [
+
+            "Increase memory limit",
+
+            "Check application memory leak",
+
+            "Review memory requests and limits"
+
+        ]
+    },
+
+    {
+        "name": "CrashLoopBackOff",
+
+        "conditions": {
+
+            "logs": "CrashLoopBackOff",
+
+            "restarts": 5
+
+        },
+
+        "recommended_fix": [
+
+            "Inspect application startup logs",
+
+            "Verify configuration",
+
+            "Check mounted volumes"
+
+        ]
+    },
+
+    {
+        "name": "Image Pull Failure",
+
+        "conditions": {
+
+            "logs": "ImagePullBackOff"
+
+        },
+
+        "recommended_fix": [
+
+            "Verify image name",
+
+            "Check registry credentials",
+
+            "Ensure image exists"
+
+        ]
+    },
+
+    {
+        "name": "Pending PVC",
+
+        "conditions": {
+
+            "logs": "Pending",
+
+            "storage": "Pending"
+
+        },
+
+        "recommended_fix": [
+
+            "Check StorageClass",
+
+            "Verify Persistent Volume",
+
+            "Inspect PVC events"
+
+        ]
+    }
+]

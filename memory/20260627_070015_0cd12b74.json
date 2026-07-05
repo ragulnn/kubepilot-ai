@@ -1,0 +1,168 @@
+{
+    "question": "Show all nginx pods",
+    "fingerprint": {
+        "cluster": "kind",
+        "resource_type": "",
+        "resource_name": "nginx-7f8fbb96d-pt7cq",
+        "namespace": "default",
+        "symptom": "No specific symptom",
+        "root_cause": "Unknown",
+        "confidence": 1.0,
+        "severity": "low",
+        "tool_history": [
+            "pods"
+        ],
+        "evidence": [
+            {
+                "type": "pod",
+                "resource": "nginx-7f8fbb96d-pt7cq",
+                "namespace": "default",
+                "value": "Running",
+                "confidence": 0.05,
+                "source": "pods"
+            }
+        ],
+        "timestamp": "2026-06-27T07:00:15.907289"
+    },
+    "report": {
+        "root_cause": "Unknown",
+        "confidence": 1.0,
+        "severity": "low",
+        "symptom": "No specific symptom",
+        "affected_resource": "nginx-7f8fbb96d-pt7cq",
+        "namespace": "default",
+        "evidence": [
+            {
+                "type": "pod",
+                "resource": "nginx-7f8fbb96d-pt7cq",
+                "namespace": "default",
+                "value": "Running",
+                "confidence": 0.05,
+                "source": "pods"
+            }
+        ],
+        "recommended_fix": [
+            "Verify if additional nginx pods are expected based on deployment configuration",
+            "Check for pod creation logs or events to identify missing pods"
+        ],
+        "next_action": {
+            "tool": "kubectl",
+            "resource": "get pods",
+            "name": "pods",
+            "namespace": "default"
+        },
+        "requires_more_evidence": true,
+        "requires_manual_review": true
+    },
+    "observations": [
+        {
+            "step": 1,
+            "tool": "pods",
+            "reason": "Planner selected this tool.",
+            "summary": {
+                "tool": "pods",
+                "running": 10,
+                "pending": 0,
+                "failed": 0,
+                "crashloop": 0,
+                "total": 11
+            },
+            "resources": {
+                "pods": [
+                    {
+                        "kind": "Pod",
+                        "namespace": "default",
+                        "name": "nginx-7f8fbb96d-pt7cq",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 1,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "coredns-589f44dc88-4pz5q",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "coredns-589f44dc88-85frt",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "etcd-kubernetes-demo-cluster-control-plane",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "kindnet-9674v",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "kube-apiserver-kubernetes-demo-cluster-control-plane",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "kube-controller-manager-kubernetes-demo-cluster-control-plane",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "kube-proxy-4zb58",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "kube-system",
+                        "name": "kube-scheduler-kubernetes-demo-cluster-control-plane",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 2,
+                        "age": "(7d"
+                    },
+                    {
+                        "kind": "Pod",
+                        "namespace": "local-path-storage",
+                        "name": "local-path-provisioner-855c7b7774-rswbn",
+                        "ready": "1/1",
+                        "status": "Running",
+                        "restarts": 4,
+                        "age": "(7d"
+                    }
+                ]
+            },
+            "raw": "NAMESPACE            NAME                                                            READY   STATUS    RESTARTS     AGE\ndefault              nginx-7f8fbb96d-pt7cq                                           1/1     Running   1 (7d ago)   8d\nkube-system          coredns-589f44dc88-4pz5q                                        1/1     Running   2 (7d ago)   8d\nkube-system          coredns-589f44dc88-85frt                                        1/1     Running   2 (7d ago)   8d\nkube-system          etcd-kubernetes-demo-cluster-control-plane                      1/1     Running   2 (7d ago)   8d\nkube-system          kindnet-9674v                                                   1/1     Running   2 (7d ago)   8d\nkube-system          kube-apiserver-kubernetes-demo-cluster-control-plane            1/1     Running   2 (7d ago)   8d\nkube-system          kube-controller-manager-kubernetes-demo-cluster-control-plane   1/1     Running   2 (7d ago)   8d\nkube-system          kube-proxy-4zb58                                                1/1     Running   2 (7d ago)   8d\nkube-system          kube-scheduler-kubernetes-demo-cluster-control-plane            1/1     Running   2 (7d ago)   8d\nlocal-path-storage   local-path-provisioner-855c7b7774-rswbn                         1/1     Running   4 (7d ago)   8d\n",
+            "timestamp": "2026-06-27T06:57:17.787546"
+        }
+    ]
+}

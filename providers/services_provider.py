@@ -1,3 +1,4 @@
+
 from providers.base import KubernetesTool
 from providers.registry import register_tool
 from utils.kubectl import run_kubectl
@@ -10,5 +11,14 @@ class ServicesTool(KubernetesTool):
 
     description = "List Kubernetes Services"
 
-    def run(self, **kwargs):
-        return run_kubectl("get svc -A")
+    def run(
+        self,
+        resource="",
+        name="",
+        namespace="default",
+        **kwargs,
+    ):
+
+        return run_kubectl(
+            "get svc -A"
+        )

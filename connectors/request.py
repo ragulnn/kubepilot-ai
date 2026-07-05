@@ -8,21 +8,31 @@ class EvidenceRequest:
     every Kubepilot Agent.
     """
 
-    # ---------- Routing ----------
+    # -------------------------
+    # Routing
+    # -------------------------
 
     cluster: str = "default"
 
-    # ---------- Evidence ----------
+    # -------------------------
+    # Evidence Type
+    # -------------------------
 
     type: str = ""
 
-    # ---------- Resource ----------
+    # -------------------------
+    # Kubernetes Resource
+    # -------------------------
+
+    kind: str | None = None
+
+    name: str | None = None
+
+    namespace: str | None = None
 
     resource: str | None = None
 
     resource_type: str | None = None
-
-    namespace: str | None = None
 
     labels: dict = field(default_factory=dict)
 
@@ -30,29 +40,47 @@ class EvidenceRequest:
 
     keyword: str | None = None
 
-    # ---------- Metrics ----------
+    # -------------------------
+    # Metrics
+    # -------------------------
 
     metric: str | None = None
 
-    # ---------- Logs ----------
+    # -------------------------
+    # Logs
+    # -------------------------
 
     log_level: str | None = None
+    # -------------------------
+    # Traces
+    # -------------------------
 
-    # ---------- Time ----------
+    trace_id: str | None = None
+
+    service: str | None = None
+    # -------------------------
+    # Time
+    # -------------------------
 
     since: str | None = None
 
     time_range: str = "5m"
 
-    # ---------- Filters ----------
+    # -------------------------
+    # Filters
+    # -------------------------
 
     filters: dict = field(default_factory=dict)
 
-    # ---------- Limits ----------
+    # -------------------------
+    # Limits
+    # -------------------------
 
     limit: int = 100
 
-    # ---------- Investigation ----------
+    # -------------------------
+    # Investigation Flags
+    # -------------------------
 
     include_events: bool = False
 

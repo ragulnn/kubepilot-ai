@@ -10,15 +10,19 @@ class LogsTool(KubernetesTool):
 
     description = "Get pod logs"
 
-    def run(self, **kwargs):
+    def run(
+        self,
+        resource="",
+        name="",
+        namespace="default",
+        **kwargs,
+    ):
 
-        pod = kwargs["pod"]
-
-        namespace = kwargs.get(
-            "namespace",
-            "default"
-        )
+        if not name:
+            raise Exception(
+                "LogsTool requires a resource name."
+            )
 
         return run_kubectl(
-            f"logs {pod} -n {namespace}"
+            f"logs {name} -n {namespace}"
         )

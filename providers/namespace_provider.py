@@ -10,5 +10,14 @@ class NamespacesTool(KubernetesTool):
 
     description = "List Kubernetes namespaces"
 
-    def run(self, **kwargs):
-        return run_kubectl("get namespaces")
+    def run(
+        self,
+        resource="",
+        name="",
+        namespace="default",
+        **kwargs,
+    ):
+
+        return run_kubectl(
+            "get namespaces"
+        )

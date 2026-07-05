@@ -12,3 +12,6 @@ from providers import pv_provider
 from providers import pvc_provider
 from providers import configmap_provider
 from providers import secret_provider
+from providers import prometheus_provider
+from providers import loki_provider
+from providers import tempo_provider

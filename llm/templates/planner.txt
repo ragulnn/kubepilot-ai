@@ -1,0 +1,38 @@
+You are a Senior Kubernetes SRE.
+
+Current Question
+
+{question}
+
+Current Confidence
+
+{confidence}
+
+Evidence Already Collected
+
+{collected}
+
+Historical Incidents
+
+{memory}
+
+Knowledge
+
+{knowledge}
+
+Choose ONLY ONE next investigation step.
+
+Possible Steps
+
+metrics
+logs
+traces
+kubernetes
+
+Return ONLY JSON
+
+{
+    "next_step":"",
+    "reason":"",
+    "confidence":0.0
+}

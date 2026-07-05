@@ -1,30 +1,28 @@
 from fastapi import FastAPI
 
-from agent_server.health import HealthMonitor
-from agent_protocol.registration import AgentRegistration
-from pydantic import BaseModel
-
 from agent.graph import graph
 
+from agent_server.collect import router as collect_router
+from agent_server.health import HealthMonitor
+from agent_server.models import InvestigationRequest
+from agent_protocol.registration import AgentRegistration
 
-class InvestigationRequest(BaseModel):
-
-    question: str
-registered_agents = {}
 app = FastAPI()
 
+# Register additional routes
+app.include_router(collect_router)
+
 health = HealthMonitor()
+
+registered_agents = {}
 
 
 @app.get("/")
 def root():
 
     return {
-
         "application": "Kubepilot Agent",
-
         "version": "1.0.0",
-
     }
 
 
@@ -32,6 +30,8 @@ def root():
 def healthy():
 
     return health.healthy()
+
+
 @app.post("/register")
 def register(agent: AgentRegistration):
 
@@ -54,6 +54,8 @@ def register(agent: AgentRegistration):
         "cluster": agent.cluster,
 
     }
+
+
 @app.post("/investigate")
 def investigate(request: InvestigationRequest):
 

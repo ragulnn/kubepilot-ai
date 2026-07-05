@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crash-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crash-demo
+  template:
+    metadata:
+      labels:
+        app: crash-demo
+    spec:
+      containers:
+      - name: crash
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          echo "Kubepilot CrashLoopBackOff Test"
+          sleep 2
+          exit 1

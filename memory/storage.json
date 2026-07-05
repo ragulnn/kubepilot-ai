@@ -1,0 +1,286 @@
+[
+    {
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx",
+        "namespace": "default",
+        "root_cause": "Memory Exhaustion",
+        "confidence": 0.95,
+        "findings": [
+            "OOMKilled",
+            "Restart Count 8"
+        ],
+        "recommendations": [
+            "Increase memory"
+        ],
+        "timestamp": "2026-07-02 07:55:55.572951"
+    },
+    {
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx",
+        "namespace": "default",
+        "root_cause": "Memory Exhaustion",
+        "confidence": 0.95,
+        "findings": [
+            "OOMKilled",
+            "Restart Count 8"
+        ],
+        "recommendations": [
+            "Increase memory"
+        ],
+        "timestamp": "2026-07-02 08:01:00.954100"
+    },
+    {
+        "id": "9ebd38ff-1657-467d-a1ff-390785aeab2c",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx",
+        "namespace": "default",
+        "root_cause": "Memory Exhaustion",
+        "confidence": 0.95,
+        "findings": [
+            "OOMKilled",
+            "Restart Count 8"
+        ],
+        "recommendations": [
+            "Increase memory"
+        ],
+        "timestamp": "2026-07-02 14:24:17.098516"
+    },
+    {
+        "id": "babaad4e-0806-462c-8d37-bbe0386d9844",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx",
+        "namespace": "default",
+        "root_cause": "Memory Exhaustion",
+        "confidence": 0.95,
+        "findings": [
+            "OOMKilled",
+            "Restart Count 8"
+        ],
+        "recommendations": [
+            "Increase memory"
+        ],
+        "timestamp": "2026-07-02 14:27:22.054639"
+    },
+    {
+        "id": "62aea95a-08e5-438e-8e42-c69b6088fbb8",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx",
+        "namespace": "default",
+        "root_cause": "Memory Exhaustion",
+        "confidence": 0.95,
+        "findings": [
+            "OOMKilled",
+            "Restart Count 8"
+        ],
+        "recommendations": [
+            "Increase memory"
+        ],
+        "timestamp": "2026-07-02 14:58:39.258962"
+    },
+    {
+        "id": "4739c09b-2d26-450a-8467-2c358d72e14f",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx-6c6b594c86-sqgwd",
+        "namespace": "default",
+        "root_cause": "Pod is scheduled on control-plane node, violating best practices for workload isolation",
+        "confidence": 0.95,
+        "findings": [
+            "Pod is scheduled on control-plane node (kubernetes-demo-cluster-control-plane)"
+        ],
+        "recommendations": [
+            "Add nodeSelector to pod specification to enforce scheduling on worker nodes",
+            "Apply taints to control-plane nodes and ensure pods have matching tolerations",
+            "Verify node resource availability and adjust kube-scheduler configurations if needed"
+        ],
+        "timestamp": "2026-07-03 17:18:16.198318"
+    },
+    {
+        "id": "66112a36-4e63-4ea0-9f66-739dbca8e9dc",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx-6c6b594c86-sqgwd",
+        "namespace": "default",
+        "root_cause": "Pod scheduled on control-plane node indicating suboptimal scheduling and potential single point of failure",
+        "confidence": 0.95,
+        "findings": [
+            "Pod is scheduled on control-plane node (kubernetes-demo-cluster-control-plane)"
+        ],
+        "recommendations": [
+            "Add taint to control-plane node to prevent regular Pods from scheduling there",
+            "Update Pod specification with nodeSelector to target worker nodes",
+            "Verify cluster node roles and ensure control-plane nodes have proper taints"
+        ],
+        "timestamp": "2026-07-03 17:35:46.404237"
+    },
+    {
+        "id": "4a012ddd-1a6e-4322-9a39-914f52be76e7",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx-6c6b594c86-sqgwd",
+        "namespace": "default",
+        "root_cause": "Improper pod scheduling on control-plane node leading to potential resource contention",
+        "confidence": 0.95,
+        "findings": [
+            "Scheduled on control-plane node (kubernetes-demo-cluster-control-plane) which is not optimal for workloads",
+            "QoS Class is BestEffort which may indicate potential resource contention"
+        ],
+        "recommendations": [
+            "Update pod specification to use nodeSelector or taints to ensure scheduling only on dedicated worker nodes",
+            "Define resource requests/limits to upgrade QoS class from BestEffort to Burstable/Guaranteed"
+        ],
+        "timestamp": "2026-07-03 17:45:43.656160"
+    },
+    {
+        "id": "e02e8e77-2f97-4087-8ab3-ead07c32cd26",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx-6c6b594c86-sqgwd",
+        "namespace": "default",
+        "root_cause": "Improper pod scheduling on control-plane nodes leading to potential resource contention",
+        "confidence": 0.95,
+        "findings": [
+            "Scheduled on control-plane node (kubernetes-demo-cluster-control-plane) which is not optimal for workloads",
+            "QoS Class is BestEffort which may indicate potential resource contention"
+        ],
+        "recommendations": [
+            "Implement node selectors/taints to enforce scheduling on dedicated worker nodes",
+            "Ensure critical workloads have Guaranteed QoS class with resource limits/requests"
+        ],
+        "timestamp": "2026-07-03 17:51:02.365766"
+    },
+    {
+        "id": "28a7bec5-6ad5-4e8e-ab9b-c438337c440e",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx-6c6b594c86-sqgwd",
+        "namespace": "default",
+        "root_cause": "Improper pod scheduling on control-plane nodes with BestEffort QoS class leading to resource contention and abnormal CPU metrics",
+        "confidence": 0.75,
+        "findings": [
+            "Prometheus reports 0.0% CPU usage anomaly for workloads",
+            "Kubernetes pods scheduled on control-plane node (kubernetes-demo-cluster-control-plane) instead of worker nodes",
+            "Pod QoS Class is BestEffort indicating potential resource contention"
+        ],
+        "recommendations": [
+            "Reschedule pods to dedicated worker nodes using node selectors or taints",
+            "Update pod QoS class to Guaranteed or Burstable by allocating resource requests/limits",
+            "Verify Prometheus scraping configuration for node-exporter metrics",
+            "Implement Kubernetes node affinity rules for workload placement"
+        ],
+        "timestamp": "2026-07-03 17:54:12.647959"
+    },
+    {
+        "id": "5709b7e5-f208-4c89-b558-bcf7dd08aab3",
+        "question": "Why is nginx restarting?",
+        "resource_name": "nginx-6c6b594c86-sqgwd",
+        "namespace": "default",
+        "root_cause": "Improper pod scheduling on control-plane node leading to resource contention and potential instability",
+        "confidence": 0.85,
+        "findings": [
+            "Pod scheduled on control-plane node (kubernetes-demo-cluster-control-plane) instead of dedicated worker nodes",
+            "QoS Class is BestEffort which may indicate potential resource contention"
+        ],
+        "recommendations": [
+            "Reschedule pod to dedicated worker nodes to isolate control-plane and workloads",
+            "Update pod QoS class to Guaranteed or Burstable to ensure resource allocation",
+            "Verify Kubernetes node labels and taints to enforce proper scheduling constraints"
+        ],
+        "timestamp": "2026-07-03 17:57:42.620439"
+    },
+    {
+        "id": "048ab37c-376a-4a4c-af67-2dfa508e5981",
+        "question": "Why is crash-demo restarting?",
+        "resource_name": "crash-demo-dd44b79c9-ch9mk",
+        "namespace": "default",
+        "root_cause": "Container exit code 1 triggers CrashLoopBackOff due to intentional test configuration",
+        "confidence": 0.95,
+        "findings": [
+            "Container command explicitly exits with error code 1",
+            "Pod remains in CrashLoopBackOff state with 5 restarts",
+            "Kubernetes' CrashLoopBackOff mechanism is actively preventing stable operation"
+        ],
+        "recommendations": [
+            "Modify container command to exit with non-fatal code (e.g. 0) for test scenarios",
+            "Implement proper error handling in test container logic",
+            "Verify test environment configuration aligns with expected behavior"
+        ],
+        "timestamp": "2026-07-04 04:43:13.688303"
+    },
+    {
+        "id": "02b6c044-086d-451a-8880-ea10ca56ea6c",
+        "question": "Why is crash-demo in CrashLoopBackOff?",
+        "resource_name": "crash-demo-dd44b79c9-ch9mk",
+        "namespace": "default",
+        "root_cause": "DNS resolution failure preventing image pull from registry-1.docker.io",
+        "confidence": 0.95,
+        "findings": [
+            "kubernetes: DNS server at 172.18.0.1 is misbehaving, preventing resolution of registry-1.docker.io during image pull",
+            "loki: Pod is entering CrashLoopBackOff state due to repeated container crashes",
+            "Finding: ImagePullBackOff due to DNS resolution failure",
+            "Finding: Container exit code 1 causing CrashLoopBackOff"
+        ],
+        "recommendations": [
+            "Verify DNS server configuration at 172.18.0.1 and ensure it's properly resolving registry-1.docker.io",
+            "Check kubelet DNS settings (--cluster-dns flag) and ensure they point to a healthy DNS server",
+            "Test DNS resolution from the node using nslookup/dig for registry-1.docker.io",
+            "Restart kubelet service if DNS configuration changes are made"
+        ],
+        "timestamp": "2026-07-04 09:49:20.928069"
+    },
+    {
+        "id": "730e3aae-2c9c-4495-ae91-f01cac96fef3",
+        "question": "Why is crash-demo in CrashLoopBackOff?",
+        "resource_name": "crash-demo-dd44b79c9-ch9mk",
+        "namespace": "default",
+        "root_cause": "DNS resolution failure for Docker registry due to misconfigured/failing DNS server at 172.18.0.1:53",
+        "confidence": 0.95,
+        "findings": [
+            "kubernetes: DNS resolution failure for registry-1.docker.io due to misconfigured or failing DNS server at 173.18.0.1:53",
+            "loki: Container repeatedly crashing immediately after startup, triggering CrashLoopBackOff due to failed container health checks",
+            "Finding: ImagePullBackOff due to DNS resolution failure",
+            "Finding: CrashLoopBackOff from failed container startup",
+            "Finding: Repeated failed image pulls with DNS lookup errors"
+        ],
+        "recommendations": [
+            "Fix/replace failing DNS server at 172.18.0.1:53 with reliable DNS (e.g. 8.8.8.8, 1.1.1.1)",
+            "Verify kubelet configuration for correct DNS settings",
+            "Test DNS resolution for registry-1.docker.io manually using nslookup/dig",
+            "Check network policies/firewalls blocking DNS traffic to 172.18.0.1:53"
+        ],
+        "timestamp": "2026-07-04 14:21:57.844133"
+    },
+    {
+        "id": "6c5d5e32-830f-4cdf-9a63-4a386a71b021",
+        "question": "Why is crash-demo in CrashLoopBackOff?",
+        "resource_name": "crash-demo-dd44b79c9-ch9mk",
+        "namespace": "default",
+        "root_cause": "DNS resolution failure preventing image pull and causing container crashes",
+        "confidence": 0.9,
+        "findings": [
+            "kubernetes: DNS resolution failure for registry-1.docker.io due to unreachable DNS server (172.18.0.1:53)",
+            "Finding: ImagePullBackOff due to DNS resolution failure",
+            "loki: CrashLoopBackOff with exit code 1",
+            "Finding: Failed to pull busybox image"
+        ],
+        "recommendations": [
+            "Verify DNS server availability (172.18.0.1:53) on kubernetes-demo-cluster-control-plane node",
+            "Configure alternate DNS resolvers (e.g., 8.8.8.8) in kubelet configuration if primary DNS is unreachable",
+            "Check network policies preventing access to external DNS services",
+            "Validate CNI plugin configuration for node network connectivity"
+        ],
+        "timestamp": "2026-07-04 15:07:29.811947"
+    },
+    {
+        "id": "e5bc1cbf-5ec0-4be1-a699-bed58ef24267",
+        "question": "Why is trace-demo returning HTTP 500?",
+        "resource_name": "trace-demo-64598b6bd4-lzhbq",
+        "namespace": "default",
+        "root_cause": "Potential misconfigured Prometheus resource limits or scrape targets leading to underutilized CPU",
+        "confidence": 0.7,
+        "findings": [
+            "prometheus: CPU usage is extremely low (0.55%) indicating potential metric collection issues or underutilized resources"
+        ],
+        "recommendations": [
+            "Verify Prometheus resource limits and requests in Kubernetes deployment",
+            "Check scrape configuration for optimal interval and target efficiency",
+            "Monitor metric volume and adjust Prometheus scaling if necessary"
+        ],
+        "timestamp": "2026-07-05 13:42:21.776539"
+    }
+]

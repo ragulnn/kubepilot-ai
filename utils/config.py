@@ -3,5 +3,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-PLANNER_MODEL = os.getenv("PLANNER_MODEL", "qwen2.5:3b")
-ANALYZER_MODEL = os.getenv("ANALYZER_MODEL", "qwen3:8b")
+# Planner Model (fast)
+PLANNER_MODEL = "qwen2.5:3b"
+
+# Analyzer Model (accurate)
+ANALYZER_MODEL = "qwen2.5:7b"
+
+# Embedding / Memory (future)
+EMBEDDING_MODEL = "nomic-embed-text"

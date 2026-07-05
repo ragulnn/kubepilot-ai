@@ -1,26 +1,16 @@
-import tools.pods
-import tools.services
+from agents.pipeline import AgentPipeline
 
-from agent.planner import Planner
-from agent.executor import Executor
+state = {
+    "question": "Why is my nginx pod restarting?",
+    "workflow": "pod",
+}
 
-planner = Planner()
-executor = Executor()
+pipeline = AgentPipeline()
 
-question = "Show me pods and services"
+result = pipeline.run(state)
 
-plan = planner.create_plan(question)
-
-print("Plan")
-
-print(plan)
-
-for tool in plan:
-
-    print("=" * 50)
-
-    print(tool)
-
-    print("=" * 50)
-
-    print(executor.execute(tool))
+print()
+print("=" * 60)
+print("Pipeline Result")
+print("=" * 60)
+print(result)

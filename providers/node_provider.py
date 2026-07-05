@@ -10,7 +10,13 @@ class NodesTool(KubernetesTool):
 
     description = "List Kubernetes nodes"
 
-    def run(self, **kwargs):
+    def run(
+        self,
+        resource="",
+        name="",
+        namespace="default",
+        **kwargs,
+    ):
 
         return run_kubectl(
             "get nodes"

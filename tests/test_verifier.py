@@ -1,32 +1,31 @@
-from agent.verifier import MemoryVerifier
+from verification_engine.verifier import AIVerifier
 
-verifier = MemoryVerifier()
+print("=" * 60)
+print("AI Verification")
+print("=" * 60)
 
-current = {
+analysis = {
 
-    "root_cause":"OOMKilled",
+    "root_cause": "Memory Exhaustion",
 
-    "symptom":"CrashLoopBackOff",
+    "critical_evidence": [
 
-    "resource_name":"nginx",
+        "Memory 98%",
 
-    "namespace":"default"
+        "OOMKilled",
+
+        "Restart Count 8",
+
+        "CrashLoopBackOff",
+
+    ],
+
 }
 
-previous = {
-
-    "root_cause":"OOMKilled",
-
-    "symptom":"CrashLoopBackOff",
-
-    "resource_name":"nginx",
-
-    "namespace":"default"
-}
-
-result = verifier.verify(
-    current,
-    previous
+result = AIVerifier().verify(
+    analysis
 )
+
+print()
 
 print(result)
